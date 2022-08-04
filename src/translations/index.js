@@ -154,6 +154,37 @@ const dictonnaries = {
       "yesterday": "Вчера"
     }
   },
+  "en": {
+    "reset": "Reset bereik",
+    "submit": "Verzenden",
+    "previousMonth": "Vorige maand",
+    "nextMonth": "Volgende maand",
+    "previousYear": "Vorig jaar",
+    "nextYear": "Volgend jaar",
+    "quarter": "Kwartaal",
+    "panels": {
+      "range": "Bereik",
+      "week": "Week",
+      "month": "Maand",
+      "quarter": "Kwartaal",
+      "year": "Jaar"
+    },
+    "presets": {
+      "custom": "Bereik op maat",
+      "forever": "Vanaf het begin",
+      "last7days": "Afgelopen 7 dagen",
+      "last30days": "Laatste 30 dagen",
+      "last90days": "Laatste 90 dagen",
+      "last365days": "Laatste 365 dagen",
+      "next365days": "Komende 365 dagen",
+      "next90days": "Komende 90 dagen",
+      "next30days": "Komende 30 dagen",
+      "next7days": "Komende 7 dagen",
+      "today": "Vandaag",
+      "tomorrow": "Morgen",
+      "yesterday": "Gisteren"
+    }
+  },
 }
 
 export default dictonnaries

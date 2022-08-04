@@ -1,7 +1,7 @@
 <template lang="pug">
   div
     div(style="margin: 20px 0;")
-      date-range-picker(:to="$route.query.to" :from="$route.query.from" locale="fr" submit-title="Actualiser" :panel="$route.query.panel" begin="2016-02-19T00:00:00.000+01:00" @select="checkUpdate" :show-controls="false" :presets="['custom']" :panels=['range'] :theme="theme")
+      date-range-picker(:to="$route.query.to" :from="$route.query.from" locale="fr" submit-title="Actualiser" :panel="$route.query.panel" begin="2016-02-19T00:00:00.000+01:00" @select="checkUpdate" :show-controls="false" :presets="presets" :panels=['range'] :theme="theme")
     div(style="margin: 20px 0;")
       date-range-picker(:to="$route.query.to" :from="$route.query.from" @update="checkUpdate" rangeDisplayed="from" :future="false")
     div(style="margin: 20px 0;")
@@ -44,7 +44,8 @@
       }
     }
     locale: string = 'fr'
-    locales: string[] = ['en', 'de', 'ru', 'es', 'fr']
+    locales: string[] = ['en', 'de', 'ru', 'es', 'fr', 'nl']
+    presets: string[] = []
     checkUpdate(values) {
       this.$router.push({ query: Object.assign({}, this.$route.query, {
         to: values.to,
