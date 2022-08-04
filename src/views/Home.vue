@@ -1,7 +1,7 @@
 <template lang="pug">
   div
     div(style="margin: 20px 0;")
-      date-range-picker(:to="$route.query.to" :from="$route.query.from" locale="fr" submit-title="Actualiser" :panel="$route.query.panel" begin="2016-02-19T00:00:00.000+01:00" @select="checkUpdate" :show-controls="false" :presets="presets" :panels=['range'] :theme="theme")
+      date-range-picker(:to="$route.query.to" :from="$route.query.from" locale="fr" submit-title="Actualiser" :panel="$route.query.panel" begin="2016-02-19T00:00:00.000+01:00" @select="checkUpdate" :show-controls="false" :presets="['custom']" :panels=['range'] :theme="theme")
     div(style="margin: 20px 0;")
       date-range-picker(:to="$route.query.to" :from="$route.query.from" @update="checkUpdate" rangeDisplayed="from" :future="false")
     div(style="margin: 20px 0;")
@@ -19,11 +19,17 @@
       date-range-picker(to="2019-02-19T23:00:00.000Z" from="2019-02-15T23:00:00.000Z" @update="checkUpdate" :locale="locale" allowFrom="")
     div(style="margin: 20px 0;")
       date-range-picker(allowTo="2019-10-19T00:00:00.000Z" allowFrom="2019-10-15T00:00:00.000Z" @update="checkUpdate" :locale="locale")
+    div(style="margin: 20px 0;")
+      date-range-picker(@update="checkUpdate" :locale="locale" :presets="presets")
 </template>
 
 <script lang="ts">
   import { Component, Vue } from 'vue-property-decorator'
   import DateRangePicker from '@/components/DateRangePicker.vue'
+  import {
+    startOfDay,
+    subWeeks,
+    } from 'date-fns'
 
   @Component({
     components: {
@@ -43,9 +49,10 @@
         range: '#e6e6e6'
       }
     }
-    locale: string = 'fr'
+    locale: string = 'nl'
     locales: string[] = ['en', 'de', 'ru', 'es', 'fr', 'nl']
-    presets: string[] = []
+    presets: Array<{name: string, from: string|Date, to: string|Date} | string> =
+    ['custom', {name: 'This week', from: startOfDay(subWeeks(new Date().toISOString(), 1)), to: new Date().toISOString()}]
     checkUpdate(values) {
       this.$router.push({ query: Object.assign({}, this.$route.query, {
         to: values.to,

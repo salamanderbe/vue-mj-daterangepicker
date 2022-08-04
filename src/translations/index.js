@@ -154,8 +154,8 @@ const dictonnaries = {
       "yesterday": "Вчера"
     }
   },
-  "en": {
-    "reset": "Reset bereik",
+  "nl": {
+    "reset": "Reset",
     "submit": "Verzenden",
     "previousMonth": "Vorige maand",
     "nextMonth": "Volgende maand",

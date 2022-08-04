@@ -8,11 +8,11 @@
         ) {{ $legends[locale].panels[panel] }}
 
     .preset-ranges(v-if="isPresetPicker && presets.length > 1")
-      .preset(v-for="entry in availablePresets" @click="selectPreset(entry)")
-        input(type="radio" v-model="preset" :value="entry")
-        label(:for="entry")
+      .preset(v-for="entry in availablePresets" @click="selectPreset(typeof entry === 'string' ? entry : entry.name)")
+        input(type="radio" v-model="preset" :value="typeof entry === 'string' ? entry : entry.name")
+        label(:for="typeof entry === 'string' ? entry : entry.name")
           span.check
-          span {{ $legends[locale].presets[entry] }}
+          span {{ typeof entry === 'string' ? $legends[locale].presets[entry] : entry.name  }}
 
     .mj-calendar(:class="weekSelector ? 'mj-calendar-week' : 'mj-calendar-days'" v-if="isDaysPicker")
       .calendar-header
@@ -303,6 +303,23 @@ export default class extends Vue {
   affectPreset(preset) {
     this.current = this.now
     this.updateCalendar()
+
+    if (![
+        'today',
+        'yesterday',
+        'last7days',
+        'last30days',
+        'last90days',
+        'last365days',
+        'forever',
+        'custom'
+        ].includes(preset)) {
+        const match = this.presets.find((p) => typeof p !== 'string' && p.name === preset)
+        if (match) {
+            this.values = { from: match.from, to: match.to }
+            return
+        }
+    }
 
     switch (preset) {
       case 'custom':
